@@ -1,9 +1,11 @@
+import React from 'react';
+import Routes from './routes'
 
 function App() {
   return (
-    <>
-      <h1>Blank template</h1>
-    </>
+    <div>
+      <Routes />
+    </div>
   );
 }
 
