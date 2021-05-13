@@ -143,7 +143,7 @@ export default function Users() {
             </Pagination>
 
             <TableList
-                listItens={users}
+                listItems={users}
                 columnsNames={columnsNames}
                 columnValues={columnValues}
                 updateFunction={handleEditClick}
