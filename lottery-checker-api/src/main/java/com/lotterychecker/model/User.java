@@ -25,34 +25,36 @@ public class User {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private Long   id;
-    private String name;
-    private String mail;
-    private String password;
+    private Long    id;
+    private String  name;
+    private String  mail;
+    private String  password;
+    private boolean active;
 
     public User() {
-
     }
-
+    
     /**
      * @param name
      * @param mail
      * @param password
+     * @param active
      */
-    public User(String name, String mail, String password) {
+    public User(String name, String mail, String password, boolean active) {
 	super();
 	this.name = name;
 	this.mail = mail;
 	this.password = password;
+	this.active = active;
     }
-
+    
     /**
      * @return the id
      */
     public Long getId() {
 	return id;
     }
-
+    
     /**
      * @param id
      *            the id to set
@@ -60,14 +62,14 @@ public class User {
     public void setId(Long id) {
 	this.id = id;
     }
-
+    
     /**
      * @return the name
      */
     public String getName() {
 	return name;
     }
-
+    
     /**
      * @param name
      *            the name to set
@@ -75,14 +77,14 @@ public class User {
     public void setName(String name) {
 	this.name = name;
     }
-
+    
     /**
      * @return the mail
      */
     public String getMail() {
 	return mail;
     }
-
+    
     /**
      * @param mail
      *            the mail to set
@@ -90,14 +92,14 @@ public class User {
     public void setMail(String mail) {
 	this.mail = mail;
     }
-
+    
     /**
      * @return the password
      */
     public String getPassword() {
 	return password;
     }
-
+    
     /**
      * @param password
      *            the password to set
@@ -106,9 +108,24 @@ public class User {
 	this.password = password;
     }
     
+    /**
+     * @return the active
+     */
+    public boolean isActive() {
+	return active;
+    }
+    
+    /**
+     * @param active
+     *            the active to set
+     */
+    public void setActive(boolean active) {
+	this.active = active;
+    }
+    
     @Override
     public String toString() {
-	return "User [id=" + id + ", name=" + name + ", mail=" + mail + ", password=" + password + "]";
+	return "User [id=" + id + ", name=" + name + ", mail=" + mail + ", active=" + active + "]";
     }
-
+    
 }
