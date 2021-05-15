@@ -6,8 +6,8 @@ import { ModalInfo, ModalActionConfirmation } from '../../components/modals'
 import { TableList } from '../../components/table'
 
 export default function Users() {
-    const columnsNames = ["Id", "Mail", "Name", "Active", "Remove"];
-    const columnValues = ["id", "mail", "name", "active"];
+    const columnsNames = ["Id", "Mail", "Name", "Active", "Edit"];
+    const columnValues = ["id", "mail", "name"];
 
     const [users, setUsers] = useState([])
 

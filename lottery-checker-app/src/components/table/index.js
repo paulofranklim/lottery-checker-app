@@ -1,6 +1,6 @@
 import React from 'react'
-import { Table, Button } from 'react-bootstrap'
-import { FiTrash2 } from "react-icons/fi";
+import { Table, Button, Form } from 'react-bootstrap'
+import { FiEdit } from "react-icons/fi";
 
 export const TableList = (props) => {
   const { listItems, columnsNames, columnValues, updateFunction, deleteFunction } = props
@@ -20,8 +20,11 @@ export const TableList = (props) => {
             {columnValues.map(value => (
               <td key={value}>{item[value]}</td>
             ))}
+            <td>
+              <Form.Check style={{ textAlign: 'center' }} type="checkbox" disabled checked={item.active} />
+            </td>
             <td style={{ width: '10%', textAlign: 'center' }} >
-              <Button className="btn btn-danger btn-sm" onClick={() => { deleteFunction(item) }}> <FiTrash2 /> </Button>
+              <Button className="btn btn-primary btn-sm" onClick={() => { updateFunction(item) }}> <FiEdit /> </Button>
             </td>
           </tr>
         ))}
