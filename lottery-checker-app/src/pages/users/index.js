@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Menu from '../../components/menu'
 import { Form, Col, Pagination, Button } from 'react-bootstrap'
 import { api } from '../../services/api'
-import { ModalInfo, ModalActionConfirmation } from '../../components/modals'
+import { ModalInfo } from '../../components/modals'
 import { TableList } from '../../components/table'
 
 export default function Users() {
@@ -17,11 +17,9 @@ export default function Users() {
     const [password, setPassword] = useState("")
     const [active, setActive] = useState(true)
 
-    const [tempId, setTempId] = useState("")
     const [tempLogin, setTempLogin] = useState("")
 
     const [showModalInsert, setShowModalInsert] = useState(false);
-    const [showModalDelete, setShowModalDelete] = useState(false);
     const [showModalError, setShowModalError] = useState(false);
     const [msgError, setMsgError] = useState("")
 
@@ -31,8 +29,7 @@ export default function Users() {
 
     useEffect(() => {
         api.get('load-users').then(response => {
-            const total = response.headers['x-total-count'];
-
+            const total = response.data.length
             let tempPages = []
             for (let i = total; i > 0; i = i - 5) {
                 tempPages.push(<Pagination.Item key={tempPages.length} active={tempPages.length + 1 === activePage}>{tempPages.length + 1}</Pagination.Item>)
@@ -68,19 +65,6 @@ export default function Users() {
         }
     }
 
-    async function handleDelete(e) {
-        e.preventDefault()
-        try {
-            await api.delete('users/' + tempId)
-            clearFields();
-            setActualize(!actualize);
-            setShowModalDelete(false);
-        } catch (error) {
-            setMsgError("Cannot delete user. " + error)
-            setShowModalError(true)
-        }
-    }
-
     function handleEditClick(user) {
         setId(user.id)
         setName(user.name)
@@ -95,12 +79,6 @@ export default function Users() {
             setActivePage(num)
             setActualize(!actualize);
         }
-    }
-
-    function prepareToDelete(user) {
-        setTempId(user.id);
-        setTempLogin(user.mail)
-        setShowModalDelete(true);
     }
 
     function clearFields() {
@@ -148,16 +126,6 @@ export default function Users() {
                 columnsNames={columnsNames}
                 columnValues={columnValues}
                 updateFunction={handleEditClick}
-                deleteFunction={prepareToDelete}
-            />
-
-            <ModalActionConfirmation
-                show={showModalDelete}
-                closeModalFunction={() => setShowModalDelete(false)}
-                title="Delete User"
-                message={"Are you sure? Confirm delete user '" + tempLogin + "'?"}
-                actionName="Delete"
-                actionFunction={handleDelete}
             />
 
             <ModalInfo

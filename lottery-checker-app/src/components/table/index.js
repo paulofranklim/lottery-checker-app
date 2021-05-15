@@ -3,7 +3,7 @@ import { Table, Button, Form } from 'react-bootstrap'
 import { FiEdit } from "react-icons/fi";
 
 export const TableList = (props) => {
-  const { listItems, columnsNames, columnValues, updateFunction, deleteFunction } = props
+  const { listItems, columnsNames, columnValues, updateFunction } = props
 
   return (
     <Table style={{ marginLeft: 20, width: '50%' }} striped bordered hover size="sm">
