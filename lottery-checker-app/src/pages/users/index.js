@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Menu from '../../components/menu'
-import { Form, Col, Pagination, Button } from 'react-bootstrap'
+import { Form, Col, Button } from 'react-bootstrap'
 import { api } from '../../services/api'
 import { ModalInfo } from '../../components/modals'
 import { TableList } from '../../components/table'
@@ -23,18 +23,10 @@ export default function Users() {
     const [showModalError, setShowModalError] = useState(false);
     const [msgError, setMsgError] = useState("")
 
-    const [activePage, setActivePage] = useState(1)
-    const [pages, setPages] = useState([])
     const [actualize, setActualize] = useState(true)
 
     useEffect(() => {
         api.get('load-users').then(response => {
-            const total = response.data.length
-            let tempPages = []
-            for (let i = total; i > 0; i = i - 5) {
-                tempPages.push(<Pagination.Item key={tempPages.length} active={tempPages.length + 1 === activePage}>{tempPages.length + 1}</Pagination.Item>)
-            }
-            setPages(tempPages)
             setUsers(response.data)
         })
 
@@ -73,14 +65,6 @@ export default function Users() {
         setPassword(user.password)
     }
 
-    function handleFilter(e) {
-        const num = e.target.text
-        if (num) {
-            setActivePage(num)
-            setActualize(!actualize);
-        }
-    }
-
     function clearFields() {
         setId("")
         setName("")
@@ -117,15 +101,12 @@ export default function Users() {
                 <Button style={{ width: '80px', marginLeft: 10 }} variant="outline-danger" onClick={() => clearFields()} >Cancel</Button>
             </Form>
 
-            <Pagination onClick={handleFilter} style={{ marginBottom: 0, marginLeft: '25%' }} size="sm" >
-                {pages}
-            </Pagination>
-
             <TableList
                 listItems={users}
                 columnsNames={columnsNames}
                 columnValues={columnValues}
                 updateFunction={handleEditClick}
+                pageSize={7}
             />
 
             <ModalInfo
