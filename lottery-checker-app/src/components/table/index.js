@@ -17,7 +17,7 @@ export const TableList = (props) => {
   return (
     <Tabs defaultActiveKey="1" id="users-table">
       {paginatedItems.map(paginatedItem => (
-        <Tab eventKey={tablePageIndex} title={tablePageIndex++}>
+        <Tab key={tablePageIndex} eventKey={tablePageIndex} title={tablePageIndex++}>
           <Table style={{ marginLeft: 20, width: '50%' }} striped bordered hover size="sm">
             <thead>
               <tr>
