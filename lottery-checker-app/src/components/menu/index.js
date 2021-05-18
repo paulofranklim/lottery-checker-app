@@ -28,7 +28,7 @@ export default function Menu() {
               <NavDropdown.Item href="/games">Games</NavDropdown.Item>
               <NavDropdown.Item href="/users">Users</NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="#">MY BETS</Nav.Link>
+            <Nav.Link href="/bets">MY BETS</Nav.Link>
           </Nav>
           <Form inline>
             <FormText style={{ fontSize: 16 }}> <FaUser /> {login} </FormText>
