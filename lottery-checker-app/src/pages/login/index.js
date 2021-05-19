@@ -28,10 +28,11 @@ export default function Login() {
 
     try {
       const response = await api.post('/auth', data)
-      const { mail, name } = response.data;
+      const { id, mail, name } = response.data;
 
       if (mail) {
         sessionStorage.setItem('login', name)
+        sessionStorage.setItem('userId', id)
         history.push("/home")
       } else {
         setShowModal(true)
