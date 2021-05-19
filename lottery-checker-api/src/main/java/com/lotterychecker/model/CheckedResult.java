@@ -24,9 +24,9 @@ import javax.persistence.Id;
 
 @Entity
 public class CheckedResult {
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long       id;
     private String     gameName;
     private Long       drawNumber;
@@ -36,10 +36,10 @@ public class CheckedResult {
     private int	       hits;
     private BigDecimal prize;
     private Long       userId;
-
+    
     public CheckedResult() {
     }
-    
+
     /**
      * @param gameName
      * @param drawNumber
@@ -61,14 +61,14 @@ public class CheckedResult {
 	this.prize = prize;
 	this.userId = userId;
     }
-
+    
     /**
      * @return the id
      */
     public Long getId() {
 	return id;
     }
-
+    
     /**
      * @param id
      *            the id to set
@@ -76,14 +76,14 @@ public class CheckedResult {
     public void setId(Long id) {
 	this.id = id;
     }
-
+    
     /**
      * @return the gameName
      */
     public String getGameName() {
 	return gameName;
     }
-
+    
     /**
      * @param gameName
      *            the gameName to set
@@ -91,14 +91,14 @@ public class CheckedResult {
     public void setGameName(String gameName) {
 	this.gameName = gameName;
     }
-
+    
     /**
      * @return the drawNumber
      */
     public Long getDrawNumber() {
 	return drawNumber;
     }
-
+    
     /**
      * @param drawNumber
      *            the drawNumber to set
@@ -106,14 +106,14 @@ public class CheckedResult {
     public void setDrawNumber(Long drawNumber) {
 	this.drawNumber = drawNumber;
     }
-
+    
     /**
      * @return the drawDate
      */
     public String getDrawDate() {
 	return drawDate;
     }
-
+    
     /**
      * @param drawDate
      *            the drawDate to set
@@ -121,14 +121,14 @@ public class CheckedResult {
     public void setDrawDate(String drawDate) {
 	this.drawDate = drawDate;
     }
-
+    
     /**
      * @return the drawNumbers
      */
     public String getDrawNumbers() {
 	return drawNumbers;
     }
-
+    
     /**
      * @param drawNumbers
      *            the drawNumbers to set
@@ -136,14 +136,14 @@ public class CheckedResult {
     public void setDrawNumbers(String drawNumbers) {
 	this.drawNumbers = drawNumbers;
     }
-
+    
     /**
      * @return the hittedNumbers
      */
     public String getHittedNumbers() {
 	return hittedNumbers;
     }
-
+    
     /**
      * @param hittedNumbers
      *            the hittedNumbers to set
@@ -151,14 +151,14 @@ public class CheckedResult {
     public void setHittedNumbers(String hittedNumbers) {
 	this.hittedNumbers = hittedNumbers;
     }
-
+    
     /**
      * @return the hits
      */
     public int getHits() {
 	return hits;
     }
-
+    
     /**
      * @param hits
      *            the hits to set
@@ -166,14 +166,14 @@ public class CheckedResult {
     public void setHits(int hits) {
 	this.hits = hits;
     }
-
+    
     /**
      * @return the prize
      */
     public BigDecimal getPrize() {
 	return prize;
     }
-
+    
     /**
      * @param prize
      *            the prize to set
@@ -181,14 +181,14 @@ public class CheckedResult {
     public void setPrize(BigDecimal prize) {
 	this.prize = prize;
     }
-
+    
     /**
      * @return the userId
      */
     public Long getUserId() {
 	return userId;
     }
-
+    
     /**
      * @param userId
      *            the userId to set
@@ -196,11 +196,11 @@ public class CheckedResult {
     public void setUserId(Long userId) {
 	this.userId = userId;
     }
-
+    
     @Override
     public String toString() {
 	return "CheckedResult [id=" + id + ", gameName=" + gameName + ", drawNumber=" + drawNumber + ", drawDate=" + drawDate + ", drawNumbers=" + drawNumbers
 	        + ", hittedNumbers=" + hittedNumbers + ", hits=" + hits + ", prize=" + prize + ", userId=" + userId + "]";
     }
-
+    
 }

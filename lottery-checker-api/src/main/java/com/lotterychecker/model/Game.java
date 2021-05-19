@@ -22,8 +22,8 @@ import javax.persistence.Id;
 
 @Entity
 public class Game {
-
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long    id;
     private String  name;
@@ -32,10 +32,10 @@ public class Game {
     private int	    lastPossibleNumber;
     private Long    lastDraw;
     private boolean active;
-
+    
     public Game() {
     }
-    
+
     /**
      * @param name
      * @param numberMin
@@ -53,14 +53,14 @@ public class Game {
 	this.lastDraw = lastDraw;
 	this.active = active;
     }
-    
+
     /**
      * @return the id
      */
     public Long getId() {
 	return id;
     }
-    
+
     /**
      * @param id
      *            the id to set
@@ -68,14 +68,14 @@ public class Game {
     public void setId(Long id) {
 	this.id = id;
     }
-    
+
     /**
      * @return the name
      */
     public String getName() {
 	return name;
     }
-    
+
     /**
      * @param name
      *            the name to set
@@ -83,14 +83,14 @@ public class Game {
     public void setName(String name) {
 	this.name = name;
     }
-    
+
     /**
      * @return the numberMin
      */
     public int getNumberMin() {
 	return numberMin;
     }
-    
+
     /**
      * @param numberMin
      *            the numberMin to set
@@ -98,14 +98,14 @@ public class Game {
     public void setNumberMin(int numberMin) {
 	this.numberMin = numberMin;
     }
-    
+
     /**
      * @return the numberMax
      */
     public int getNumberMax() {
 	return numberMax;
     }
-    
+
     /**
      * @param numberMax
      *            the numberMax to set
@@ -113,14 +113,14 @@ public class Game {
     public void setNumberMax(int numberMax) {
 	this.numberMax = numberMax;
     }
-    
+
     /**
      * @return the lastPossibleNumber
      */
     public int getLastPossibleNumber() {
 	return lastPossibleNumber;
     }
-    
+
     /**
      * @param lastPossibleNumber
      *            the lastPossibleNumber to set
@@ -128,14 +128,14 @@ public class Game {
     public void setLastPossibleNumber(int lastPossibleNumber) {
 	this.lastPossibleNumber = lastPossibleNumber;
     }
-    
+
     /**
      * @return the lastDraw
      */
     public Long getLastDraw() {
 	return lastDraw;
     }
-    
+
     /**
      * @param lastDraw
      *            the lastDraw to set
@@ -143,14 +143,14 @@ public class Game {
     public void setLastDraw(Long lastDraw) {
 	this.lastDraw = lastDraw;
     }
-    
+
     /**
      * @return the active
      */
     public boolean isActive() {
 	return active;
     }
-    
+
     /**
      * @param active
      *            the active to set
@@ -158,11 +158,11 @@ public class Game {
     public void setActive(boolean active) {
 	this.active = active;
     }
-    
+
     @Override
     public String toString() {
 	return "Game [id=" + id + ", name=" + name + ", numberMin=" + numberMin + ", numberMax=" + numberMax + ", lastPossibleNumber=" + lastPossibleNumber
 	        + ", lastDraw=" + lastDraw + ", active=" + active + "]";
     }
-    
+
 }

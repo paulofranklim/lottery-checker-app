@@ -24,19 +24,19 @@ import javax.persistence.Id;
 
 @Entity
 public class Bet {
-
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long       id;
     private boolean    active;
     private BigDecimal accumulatedPrize;
     private String     numbers;
     private Long       userId;
     private Long       gameId;
-
+    
     public Bet() {
     }
-
+    
     /**
      * @param active
      * @param accumulatedPrize
@@ -52,14 +52,14 @@ public class Bet {
 	this.userId = userId;
 	this.gameId = gameId;
     }
-
+    
     /**
      * @return the id
      */
     public Long getId() {
 	return id;
     }
-
+    
     /**
      * @param id
      *            the id to set
@@ -67,14 +67,14 @@ public class Bet {
     public void setId(Long id) {
 	this.id = id;
     }
-
+    
     /**
      * @return the active
      */
     public boolean isActive() {
 	return active;
     }
-
+    
     /**
      * @param active
      *            the active to set
@@ -82,14 +82,14 @@ public class Bet {
     public void setActive(boolean active) {
 	this.active = active;
     }
-
+    
     /**
      * @return the accumulatedPrize
      */
     public BigDecimal getAccumulatedPrize() {
 	return accumulatedPrize;
     }
-
+    
     /**
      * @param accumulatedPrize
      *            the accumulatedPrize to set
@@ -97,14 +97,14 @@ public class Bet {
     public void setAccumulatedPrize(BigDecimal accumulatedPrize) {
 	this.accumulatedPrize = accumulatedPrize;
     }
-
+    
     /**
      * @return the numbers
      */
     public String getNumbers() {
 	return numbers;
     }
-
+    
     /**
      * @param numbers
      *            the numbers to set
@@ -112,14 +112,14 @@ public class Bet {
     public void setNumbers(String numbers) {
 	this.numbers = numbers;
     }
-
+    
     /**
      * @return the userId
      */
     public Long getUserId() {
 	return userId;
     }
-
+    
     /**
      * @param userId
      *            the userId to set
@@ -127,14 +127,14 @@ public class Bet {
     public void setUserId(Long userId) {
 	this.userId = userId;
     }
-
+    
     /**
      * @return the gameId
      */
     public Long getGameId() {
 	return gameId;
     }
-
+    
     /**
      * @param gameId
      *            the gameId to set
@@ -142,11 +142,11 @@ public class Bet {
     public void setGameId(Long gameId) {
 	this.gameId = gameId;
     }
-
+    
     @Override
     public String toString() {
 	return "Bet [id=" + id + ", active=" + active + ", accumulatedPrize=" + accumulatedPrize + ", numbers=" + numbers + ", userId=" + userId + ", gameId="
 	        + gameId + "]";
     }
-
+    
 }
