@@ -9,7 +9,7 @@ export default function Bets() {
     const userId = sessionStorage.getItem('userId')
 
     const columnsNames = ["Id", "Game", "Prizes", "Numbers", "Active", "Edit"];
-    const columnValues = ["id", "gameId", "accumulatedPrize", "numbers"];
+    const columnValues = ["id", "gameName", "accumulatedPrize", "numbers"];
 
     const [bets, setBets] = useState([])
     const [tempBet, setTempBet] = useState("")
@@ -34,10 +34,17 @@ export default function Bets() {
         })
 
         api.get('load-bets').then(response => {
+            response.data.forEach(data => {
+                games.forEach(game => {
+                    if (game.id === data.gameId) {
+                        data.gameName = game.name
+                    }
+                })
+            })
             setBets(response.data)
         })
 
-    }, [actualize])
+    }, [actualize, games])
 
     async function handleInsert(e) {
         e.preventDefault()
@@ -90,9 +97,9 @@ export default function Bets() {
         setActualize(!actualize);
     }
 
-    function handleGameId(e) {
+    function handleGameId(gameId) {
         games.forEach(game => {
-            if (game.name === e.target.value) {
+            if (game.name === gameId) {
                 setGameName(game.name)
                 setGameId(game.id)
             }
@@ -106,7 +113,7 @@ export default function Bets() {
                 <Form.Row>
                     <Form.Group as={Col} md="2" >
                         <Form.Label>Game</Form.Label>
-                        <Form.Control as="select" value={gameName} required onChange={e => handleGameId(e)} placeholder="Insert name">
+                        <Form.Control as="select" value={gameName} required onChange={e => handleGameId(e.target.value)} placeholder="Insert name">
                             <option>Select a game</option>
                             {games.map(game => (
                                 <option>{game.name}</option>
