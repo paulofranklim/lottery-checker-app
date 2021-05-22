@@ -9,14 +9,15 @@ export default function Bets() {
     const userId = sessionStorage.getItem('userId')
 
     const columnsNames = ["Id", "Game", "Prizes", "Numbers", "Active", "Edit"];
-    const columnValues = ["id", "game", "accumulatedPrize", "numbers"];
+    const columnValues = ["id", "gameId", "accumulatedPrize", "numbers"];
 
     const [bets, setBets] = useState([])
     const [tempBet, setTempBet] = useState("")
     const [games, setGames] = useState([])
+    const [gameName, setGameName] = useState()
 
     const [id, setId] = useState(0)
-    const [game, setGame] = useState("")
+    const [gameId, setGameId] = useState("")
     const [accumulatedPrize, setAccumulatedPrize] = useState("")
     const [numbers, setNumbers] = useState("")
     const [active, setActive] = useState(true)
@@ -43,7 +44,8 @@ export default function Bets() {
 
         const data = {
             id,
-            game,
+            gameId,
+            userId,
             accumulatedPrize,
             numbers,
             active
@@ -52,7 +54,7 @@ export default function Bets() {
         try {
 
             await api.post("save-bet", data)
-            setTempBet(data.game)
+            setTempBet(data.id)
             setShowModalInsert(true);
             clearFields();
             setActualize(!actualize);
@@ -65,25 +67,36 @@ export default function Bets() {
 
     function handleEditClick(bet) {
         setId(bet.id)
-        setGame(bet.game)
+        setGameId(bet.gameId)
         setAccumulatedPrize(bet.accumulatedPrize)
         setNumbers(bet.numbers)
         setActive(bet.active)
+        games.forEach(game => {
+            if (game.id === bet.gameId) {
+                setGameName(game.name)
 
+            }
+        })
     }
 
     function clearFields() {
         setId("")
-        setGame("")
+        setGameId("")
+        setGames([games])
+        setGameName("")
         setAccumulatedPrize("")
         setNumbers("")
         setActive(true)
+        setActualize(!actualize);
     }
 
     function handleGameId(e) {
-        console.log("e:")
-        console.log(e)
-        console.log(e.target.value)
+        games.forEach(game => {
+            if (game.name === e.target.value) {
+                setGameName(game.name)
+                setGameId(game.id)
+            }
+        })
     }
 
     return (
@@ -93,7 +106,8 @@ export default function Bets() {
                 <Form.Row>
                     <Form.Group as={Col} md="2" >
                         <Form.Label>Game</Form.Label>
-                        <Form.Control as="select" required value={game} onChange={e => handleGameId(e)} placeholder="Insert name">
+                        <Form.Control as="select" value={gameName} required onChange={e => handleGameId(e)} placeholder="Insert name">
+                            <option>Select a game</option>
                             {games.map(game => (
                                 <option>{game.name}</option>
                             ))}
