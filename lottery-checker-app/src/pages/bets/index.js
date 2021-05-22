@@ -4,12 +4,13 @@ import { Form, Col, Button } from 'react-bootstrap'
 import { api } from '../../services/api'
 import { ModalInfo } from '../../components/modals'
 import { TableList } from '../../components/table'
+import NumberFormat from 'react-number-format';
 
 export default function Bets() {
     const userId = sessionStorage.getItem('userId')
 
     const columnsNames = ["Id", "Game", "Prizes", "Numbers", "Active", "Edit"];
-    const columnValues = ["id", "gameName", "accumulatedPrize", "numbers"];
+    const columnValues = ["id", "gameName", "formattedAccumulatedPrize", "numbers"];
 
     const [bets, setBets] = useState([])
     const [tempBet, setTempBet] = useState("")
@@ -29,19 +30,29 @@ export default function Bets() {
     const [actualize, setActualize] = useState(true)
 
     useEffect(() => {
-        api.get('load-games').then(response => {
-            setGames(response.data)
+        api.get('load-games').then(games => {
+            setGames(games.data)
         })
 
-        api.get('load-bets').then(response => {
-            response.data.forEach(data => {
+        api.get('load-bets').then(bets => {
+            bets.data.forEach(bet => {
+                const formattedAccumulatedPrize = <NumberFormat
+                    value={bet.accumulatedPrize}
+                    displayType={'text'}
+                    prefix={'$ '}
+                    thousandSeparator={"."}
+                    decimalSeparator={","}
+                    decimalScale={2}
+                    fixedDecimalScale={true}
+                />
+                bet.formattedAccumulatedPrize = formattedAccumulatedPrize
                 games.forEach(game => {
-                    if (game.id === data.gameId) {
-                        data.gameName = game.name
+                    if (game.id === bet.gameId) {
+                        bet.gameName = game.name
                     }
                 })
             })
-            setBets(response.data)
+            setBets(bets.data)
         })
 
     }, [actualize, games])
@@ -113,7 +124,7 @@ export default function Bets() {
                 <Form.Row>
                     <Form.Group as={Col} md="2" >
                         <Form.Label>Game</Form.Label>
-                        <Form.Control as="select" value={gameName} required onChange={e => handleGameId(e.target.value)} placeholder="Insert name">
+                        <Form.Control as="select" value={gameName} required onChange={e => handleGameId(e.target.value)} >
                             <option>Select a game</option>
                             {games.map(game => (
                                 <option>{game.name}</option>
@@ -128,13 +139,13 @@ export default function Bets() {
                 <Form.Row>
                     <Form.Group as={Col} md="2" >
                         <Form.Label>Numbers</Form.Label>
-                        <Form.Control required value={numbers} onChange={e => setNumbers(e.target.value)} placeholder="Insert login" />
+                        <Form.Control required value={numbers} onChange={e => setNumbers(e.target.value)} placeholder="Insert numbers" />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
                     <Form.Group as={Col} md="2" >
                         <Form.Label>Accumulated Prizes</Form.Label>
-                        <Form.Control required value={accumulatedPrize} onChange={e => setAccumulatedPrize(e.target.value)} placeholder="Insert login" />
+                        <Form.Control required value={accumulatedPrize} onChange={e => setAccumulatedPrize(e.target.value)} placeholder="Total accumulated prize" />
                     </Form.Group>
                 </Form.Row>
                 <Button style={{ width: '80px' }} variant="outline-success" type="submit">Save</Button>
