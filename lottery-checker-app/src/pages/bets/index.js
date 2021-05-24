@@ -4,6 +4,7 @@ import { Form, Col, Button } from 'react-bootstrap'
 import { api } from '../../services/api'
 import { ModalInfo } from '../../components/modals'
 import { TableList } from '../../components/table'
+import { GameButtons } from '../../components/gamebuttons'
 import NumberFormat from 'react-number-format';
 
 export default function Bets() {
@@ -14,8 +15,11 @@ export default function Bets() {
 
     const [bets, setBets] = useState([])
     const [tempBet, setTempBet] = useState("")
+
+    const [tempGame, setTempGame] = useState("")
     const [games, setGames] = useState([])
-    const [gameName, setGameName] = useState()
+    const [gameName, setGameName] = useState("")
+
 
     const [id, setId] = useState(0)
     const [gameId, setGameId] = useState("")
@@ -26,8 +30,6 @@ export default function Bets() {
     const [showModalInsert, setShowModalInsert] = useState(false);
     const [showModalError, setShowModalError] = useState(false);
     const [msgError, setMsgError] = useState("")
-
-    const [actualize, setActualize] = useState(true)
 
     useEffect(() => {
         api.get('load-games').then(games => {
@@ -55,7 +57,7 @@ export default function Bets() {
             setBets(bets.data)
         })
 
-    }, [actualize, games])
+    }, [games])
 
     async function handleInsert(e) {
         e.preventDefault()
@@ -70,12 +72,10 @@ export default function Bets() {
         }
 
         try {
-
             await api.post("save-bet", data)
             setTempBet(data.id)
             setShowModalInsert(true);
             clearFields();
-            setActualize(!actualize);
 
         } catch (error) {
             setMsgError("Cannot insert bet. " + error)
@@ -92,7 +92,7 @@ export default function Bets() {
         games.forEach(game => {
             if (game.id === bet.gameId) {
                 setGameName(game.name)
-
+                setTempGame(game)
             }
         })
     }
@@ -105,7 +105,7 @@ export default function Bets() {
         setAccumulatedPrize("")
         setNumbers("")
         setActive(true)
-        setActualize(!actualize);
+        setTempGame()
     }
 
     function handleGameId(gameId) {
@@ -113,6 +113,7 @@ export default function Bets() {
             if (game.name === gameId) {
                 setGameName(game.name)
                 setGameId(game.id)
+                setTempGame(game)
             }
         })
     }
@@ -136,12 +137,17 @@ export default function Bets() {
                         <Form.Check value={active} checked={active} onChange={e => setActive(e.target.checked)} style={{ margin: 15 }} type="switch" id="custom-switch" label="Active" />
                     </Form.Group>
                 </Form.Row>
+
+                <Form.Row>
+                    {tempGame ? <GameButtons size={tempGame.lastPossibleNumber} /> : null}
+                </Form.Row>
                 <Form.Row>
                     <Form.Group as={Col} md="2" >
                         <Form.Label>Numbers</Form.Label>
                         <Form.Control required value={numbers} onChange={e => setNumbers(e.target.value)} placeholder="Insert numbers" />
                     </Form.Group>
                 </Form.Row>
+
                 <Form.Row>
                     <Form.Group as={Col} md="2" >
                         <Form.Label>Accumulated Prizes</Form.Label>
