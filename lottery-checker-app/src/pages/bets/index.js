@@ -31,10 +31,16 @@ export default function Bets() {
     const [showModalError, setShowModalError] = useState(false);
     const [msgError, setMsgError] = useState("")
 
+    const [actualize, setActualize] = useState(true)
+
     useEffect(() => {
         api.get('load-games').then(games => {
             setGames(games.data)
         })
+
+    }, [actualize])
+
+    useEffect(() => {
 
         api.get('load-bets').then(bets => {
             bets.data.forEach(bet => {
@@ -57,6 +63,7 @@ export default function Bets() {
             setBets(bets.data)
         })
 
+
     }, [games])
 
     async function handleInsert(e) {
@@ -76,6 +83,7 @@ export default function Bets() {
             setTempBet(data.id)
             setShowModalInsert(true);
             clearFields();
+            setActualize(!actualize);
 
         } catch (error) {
             setMsgError("Cannot insert bet. " + error)
@@ -100,12 +108,13 @@ export default function Bets() {
     function clearFields() {
         setId("")
         setGameId("")
-        setGames([games])
+        setGames([...games])
         setGameName("")
         setAccumulatedPrize("")
         setNumbers("")
         setActive(true)
         setTempGame()
+        setActualize(!actualize);
     }
 
     function handleGameId(gameId) {
