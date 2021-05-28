@@ -3,8 +3,8 @@
  */
 package com.lotterychecker.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +25,10 @@ import com.lotterychecker.repository.UserRepository;
 
 @Service
 public class AuthenticationService {
-    private Logger	   LOG = LoggerFactory.getLogger(AuthenticationService.class);
-    
+    private static final Logger	LOG = LogManager.getLogger(AuthenticationService.class);
+
     @Autowired
-    private UserRepository repository;
+    private UserRepository	repository;
     
     public User auth(String mail, String password) {
 	LOG.debug("Entry method auth(String mail, String password)");

@@ -3,8 +3,8 @@
  */
 package com.lotterychecker.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,21 +28,20 @@ import com.lotterychecker.service.AuthenticationService;
 
 @RestController
 public class AuthenticationController {
-
-    private Logger		  LOG = LoggerFactory.getLogger(AuthenticationController.class);
-
+    private static final Logger	  LOG = LogManager.getLogger(AuthenticationController.class);
+    
     @Autowired
     private AuthenticationService service;
-    
+
     @RequestMapping(value = "auth", method = RequestMethod.POST)
     public User auth(@RequestBody User authUser) {
 	LOG.debug("Entry method auth(@RequestBody User authUser)");
-	
+
 	String mail = authUser.getMail();
 	String password = authUser.getPassword();
-	
-	User user = service.auth(mail, password);
 
+	User user = service.auth(mail, password);
+	
 	LOG.debug("Exit method auth(@RequestBody User authUser)");
 	return user;
     }

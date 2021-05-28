@@ -5,8 +5,8 @@ package com.lotterychecker.controller;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,10 +32,10 @@ import com.lotterychecker.service.BetService;
 @RestController
 public class BetController {
 
-    private Logger     LOG = LoggerFactory.getLogger(BetController.class);
-
+    private static final Logger	LOG = LogManager.getLogger(BetController.class);
+    
     @Autowired
-    private BetService service;
+    private BetService		service;
 
     @RequestMapping(value = "save-bet", method = RequestMethod.POST)
     public String saveBet(@RequestBody Bet bet) {
