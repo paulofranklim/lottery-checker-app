@@ -41,7 +41,6 @@ export default function Bets() {
     }, [actualize])
 
     useEffect(() => {
-
         api.get('load-bets').then(bets => {
             bets.data.forEach(bet => {
                 const formattedAccumulatedPrize = <NumberFormat
@@ -62,8 +61,6 @@ export default function Bets() {
             })
             setBets(bets.data)
         })
-
-
     }, [games])
 
     async function handleInsert(e) {
@@ -83,7 +80,6 @@ export default function Bets() {
             setTempBet(data.id)
             setShowModalInsert(true);
             clearFields();
-            setActualize(!actualize);
 
         } catch (error) {
             setMsgError("Cannot insert bet. " + error)
@@ -118,6 +114,7 @@ export default function Bets() {
     }
 
     function handleGameId(gameId) {
+        setNumbers("")
         games.forEach(game => {
             if (game.name === gameId) {
                 setGameName(game.name)
@@ -148,7 +145,7 @@ export default function Bets() {
                 </Form.Row>
 
                 <Form.Row>
-                    {tempGame ? <GameButtons size={tempGame.lastPossibleNumber} /> : null}
+                    {tempGame ? <GameButtons numbers={numbers} setNumbers={setNumbers} size={tempGame.lastPossibleNumber} /> : null}
                 </Form.Row>
                 <Form.Row>
                     <Form.Group as={Col} md="2" >
