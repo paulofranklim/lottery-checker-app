@@ -147,12 +147,6 @@ export default function Bets() {
                 <Form.Row>
                     {tempGame ? <GameButtons numbers={numbers} setNumbers={setNumbers} size={tempGame.lastPossibleNumber} /> : null}
                 </Form.Row>
-                <Form.Row>
-                    <Form.Group as={Col} md="2" >
-                        <Form.Label>Numbers</Form.Label>
-                        <Form.Control required value={numbers} onChange={e => setNumbers(e.target.value)} placeholder="Insert numbers" />
-                    </Form.Group>
-                </Form.Row>
 
                 <Form.Row>
                     <Form.Group as={Col} md="2" >
