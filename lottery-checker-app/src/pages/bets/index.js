@@ -145,7 +145,7 @@ export default function Bets() {
                 </Form.Row>
 
                 <Form.Row>
-                    {tempGame ? <GameButtons numbers={numbers} setNumbers={setNumbers} size={tempGame.lastPossibleNumber} /> : null}
+                    {tempGame ? <GameButtons numbers={numbers} setNumbers={setNumbers} tempGame={tempGame} /> : null}
                 </Form.Row>
 
                 <Form.Row>
