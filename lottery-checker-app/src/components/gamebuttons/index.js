@@ -25,8 +25,11 @@ export const GameButtons = (props) => {
     } else {
       vNumbers = vNumbers.filter(item => item !== btnNumber)
     }
+    setNumbers(vNumbers.sort(comparToOrderNumbers).toString())
+  }
 
-    setNumbers(vNumbers.toString())
+  function comparToOrderNumbers(a, b) {
+    return a - b;
   }
 
   return (

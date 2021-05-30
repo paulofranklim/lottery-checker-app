@@ -52,16 +52,16 @@ public class InitialDataLoader implements ApplicationRunner {
 	if ("create".equalsIgnoreCase(ddlAutoProp)) {
 	    LOG.info("Starting initial values");
 	    
-	    userRepository.save(new User("Admin", "admin", "admin", true));
+	    userRepository.save(new User("Admin", "admin", "admin", "admin", true));
 	    
-	    User user = userRepository.save(new User("Paulo Franklim", "paulofranklim@hotmail.com", "1234", true));
+	    User user = userRepository.save(new User("Paulo Franklim", "paulofranklim@hotmail.com", "pfranklim", "1234", true));
 
 	    Game lotofacil = gameRepository.save(new Game("lotofacil", 15, 20, 25, (long) 0, true));
 	    Game megasena = gameRepository.save(new Game("megasena", 6, 15, 60, (long) 0, true));
 	    gameRepository.save(new Game("quina", 5, 15, 80, (long) 0, true));
 	    
 	    betRepository.save(new Bet(true, BigDecimal.ZERO, "1,3,5,6,8,9,10,13,14,16,18,20,21,22,24", user.getId(), lotofacil.getId()));
-	    betRepository.save(new Bet(true, BigDecimal.ZERO, "18,27,40,36,38,20,14,37,3,55,44,46,1,2,9", user.getId(), megasena.getId()));
+	    betRepository.save(new Bet(true, BigDecimal.ZERO, "1,2,3,9,14,18,20,27,36,37,38,40,44,46,55", user.getId(), megasena.getId()));
 	    
 	    LOG.info("Finishing initial values");
 	}
