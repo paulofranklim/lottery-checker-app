@@ -8,11 +8,11 @@ export default function Menu() {
 
   const [showModalLogOut, setShowModalLogOut] = useState(false);
 
-  const login = sessionStorage.getItem('login')
+  const userName = sessionStorage.getItem('userName')
   const history = useHistory()
 
   function handleLogOut() {
-    sessionStorage.removeItem('login')
+    sessionStorage.removeItem('userName')
     history.push('/')
   }
 
@@ -31,7 +31,7 @@ export default function Menu() {
             <Nav.Link href="/bets">MY BETS</Nav.Link>
           </Nav>
           <Form inline>
-            <FormText style={{ fontSize: 16 }}> <FaUser /> {login} </FormText>
+            <FormText style={{ fontSize: 16 }}> <FaUser /> {userName} </FormText>
             <Button onClick={() => setShowModalLogOut(true)} style={{ marginLeft: 15 }} variant="danger" size="sm"><FiPower /></Button>
           </Form>
         </Navbar.Collapse>

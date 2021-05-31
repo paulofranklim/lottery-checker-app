@@ -29,19 +29,19 @@ import com.lotterychecker.service.AuthenticationService;
 @RestController
 public class AuthenticationController {
     private static final Logger	  LOG = LogManager.getLogger(AuthenticationController.class);
-    
+
     @Autowired
     private AuthenticationService service;
-
+    
     @RequestMapping(value = "auth", method = RequestMethod.POST)
     public User auth(@RequestBody User authUser) {
 	LOG.debug("Entry method auth(@RequestBody User authUser)");
-
-	String mail = authUser.getMail();
-	String password = authUser.getPassword();
-
-	User user = service.auth(mail, password);
 	
+	String userName = authUser.getUserName();
+	String password = authUser.getPassword();
+	
+	User user = service.auth(userName, password);
+
 	LOG.debug("Exit method auth(@RequestBody User authUser)");
 	return user;
     }

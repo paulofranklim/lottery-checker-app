@@ -8,13 +8,13 @@ import { ModalInfo } from '../../components/modals'
 
 export default function Login() {
 
-  const [mail, setMail] = useState("");
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [showModal, setShowModal] = useState(false);
 
   const history = useHistory()
 
-  if (sessionStorage.getItem('login')) {
+  if (sessionStorage.getItem('userName')) {
     history.push("/home")
   }
 
@@ -22,16 +22,16 @@ export default function Login() {
     e.preventDefault()
 
     const data = {
-      mail,
+      userName,
       password
     }
 
     try {
       const response = await api.post('/auth', data)
-      const { id, mail, name } = response.data;
+      const { id, userName } = response.data;
 
-      if (mail) {
-        sessionStorage.setItem('login', name)
+      if (userName) {
+        sessionStorage.setItem('userName', userName)
         sessionStorage.setItem('userId', id)
         history.push("/home")
       } else {
@@ -45,7 +45,7 @@ export default function Login() {
   }
 
   function clearFields() {
-    setMail("")
+    setUserName("")
     setPassword("");
   }
 
@@ -60,7 +60,7 @@ export default function Login() {
               <InputGroup.Append>
                 <InputGroup.Text id="user"><FaUser /></InputGroup.Text>
               </InputGroup.Append>
-              <Form.Control value={mail} onChange={e => setMail(e.target.value)} required aria-describedby="user" placeholder="User" />
+              <Form.Control value={userName} onChange={e => setUserName(e.target.value)} required aria-describedby="user" placeholder="User" />
             </InputGroup>
 
             <InputGroup style={{ marginTop: 5 }}>

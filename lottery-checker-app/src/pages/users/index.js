@@ -13,6 +13,7 @@ export default function Users() {
 
     const [id, setId] = useState(0)
     const [name, setName] = useState("")
+    const [userName, setUserName] = useState("")
     const [mail, setMail] = useState("")
     const [password, setPassword] = useState("")
     const [active, setActive] = useState(true)
@@ -39,6 +40,7 @@ export default function Users() {
             id,
             name,
             mail,
+            userName,
             password,
             active
         }
@@ -63,6 +65,7 @@ export default function Users() {
         setMail(user.mail)
         setActive(user.active)
         setPassword(user.password)
+        setUserName(user.userName)
     }
 
     function clearFields() {
@@ -71,6 +74,7 @@ export default function Users() {
         setMail("")
         setPassword("")
         setActive(true)
+        setUserName("")
     }
 
     return (
@@ -90,11 +94,17 @@ export default function Users() {
                 <Form.Row>
                     <Form.Group as={Col} md="2" >
                         <Form.Label>Login</Form.Label>
-                        <Form.Control required value={mail} onChange={e => setMail(e.target.value)} placeholder="Insert login" />
+                        <Form.Control required value={userName} onChange={e => setUserName(e.target.value)} placeholder="Insert user name" />
                     </Form.Group>
                     <Form.Group as={Col} md="2">
                         <Form.Label>Password</Form.Label>
                         <Form.Control required value={password} onChange={e => setPassword(e.target.value)} type="password" placeholder="Insert password" />
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group as={Col} md="2" >
+                        <Form.Label>Mail</Form.Label>
+                        <Form.Control required value={mail} onChange={e => setMail(e.target.value)} placeholder="Insert mail" />
                     </Form.Group>
                 </Form.Row>
                 <Button style={{ width: '80px' }} variant="outline-success" type="submit">Save</Button>
