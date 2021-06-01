@@ -10,8 +10,8 @@ import NumberFormat from 'react-number-format';
 export default function Bets() {
     const userId = sessionStorage.getItem('userId')
 
-    const columnsNames = ["Id", "Game", "Prizes", "Numbers", "Active", "Edit"];
-    const columnValues = ["id", "gameName", "formattedAccumulatedPrize", "numbers"];
+    const columnsNames = ["Id", "Game", "Prizes", "Numbers", "Last Check", "Active", "Edit"];
+    const columnValues = ["id", "gameName", "formattedAccumulatedPrize", "numbers", "lastCheck"];
 
     const [bets, setBets] = useState([])
     const [tempBet, setTempBet] = useState("")
@@ -25,6 +25,7 @@ export default function Bets() {
     const [gameId, setGameId] = useState("")
     const [accumulatedPrize, setAccumulatedPrize] = useState("")
     const [numbers, setNumbers] = useState("")
+    const [lastCheck, setLastCheck] = useState("")
     const [active, setActive] = useState(true)
 
     const [showModalInsert, setShowModalInsert] = useState(false);
@@ -72,6 +73,7 @@ export default function Bets() {
             userId,
             accumulatedPrize,
             numbers,
+            lastCheck,
             active
         }
 
@@ -92,6 +94,7 @@ export default function Bets() {
         setGameId(bet.gameId)
         setAccumulatedPrize(bet.accumulatedPrize)
         setNumbers(bet.numbers)
+        setLastCheck(bet.lastCheck)
         setActive(bet.active)
         games.forEach(game => {
             if (game.id === bet.gameId) {
@@ -110,6 +113,7 @@ export default function Bets() {
         setNumbers("")
         setActive(true)
         setTempGame()
+        setLastCheck("")
         setActualize(!actualize);
     }
 
