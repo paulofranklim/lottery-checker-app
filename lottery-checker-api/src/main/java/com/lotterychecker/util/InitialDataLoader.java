@@ -4,6 +4,7 @@
 package com.lotterychecker.util;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -60,8 +61,10 @@ public class InitialDataLoader implements ApplicationRunner {
 	    Game megasena = gameRepository.save(new Game("megasena", 6, 15, 60, (long) 0, true));
 	    gameRepository.save(new Game("quina", 5, 15, 80, (long) 0, true));
 	    
-	    betRepository.save(new Bet(true, BigDecimal.ZERO, "1,3,5,6,8,9,10,13,14,16,18,20,21,22,24", user.getId(), lotofacil.getId()));
-	    betRepository.save(new Bet(true, BigDecimal.ZERO, "1,2,3,9,14,18,20,27,36,37,38,40,44,46,55", user.getId(), megasena.getId()));
+	    betRepository
+	            .save(new Bet(true, BigDecimal.ZERO, "1,3,5,6,8,9,10,13,14,16,18,20,21,22,24", user.getId(), lotofacil.getId(), LocalDate.of(2021, 1, 1)));
+	    betRepository
+	            .save(new Bet(true, BigDecimal.ZERO, "1,2,3,9,14,18,20,27,36,37,38,40,44,46,55", user.getId(), megasena.getId(), LocalDate.of(2021, 1, 1)));
 	    
 	    LOG.info("Finishing initial values");
 	}

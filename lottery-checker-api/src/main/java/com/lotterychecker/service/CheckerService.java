@@ -3,9 +3,9 @@
  */
 package com.lotterychecker.service;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -92,8 +92,11 @@ public class CheckerService {
 	try {
 	    String apiJson = CheckerUtil.getApiJSON(URL);
 	    apiResultVO = new ObjectMapper().readValue(apiJson, ApiResultVO.class);
+	    if (apiResultVO.getName() == null) {
+		throw new RuntimeException("Error to call result API");
+	    }
 	}
-	catch (IOException e) {
+	catch (Exception e) {
 	    String errorMsg = e.getMessage();
 	    LOG.error("Error trying while create api object. " + errorMsg);
 	    sendMail(CheckerUtil.createErrorMailCredentials(errorMsg, MAIL));
@@ -123,6 +126,10 @@ public class CheckerService {
 		    CheckedResult checkedResult = prepareResult(apiResultVO, hittedNumbers);
 		    checkedResult.setUserId(user.getId());
 		    game.setLastDraw(checkedResult.getDrawNumber());
+		    
+		    BigDecimal accumulatedPrize = bet.getAccumulatedPrize().add(checkedResult.getPrize());
+		    bet.setAccumulatedPrize(accumulatedPrize);
+		    bet.setLastCheck(LocalDate.now());
 
 		    checkedResults.add(checkedResult);
 		}
@@ -187,6 +194,7 @@ public class CheckerService {
 
 		try {
 		    resultRepository.saveAll(checkedResults);
+		    betRepository.saveAll(bets);
 		    gameRepository.save(game);
 		}
 		catch (RuntimeException e) {
