@@ -106,4 +106,12 @@ public class BetService {
 	LOG.debug("Exit method  getAllBets()");
 	return bets;
     }
+    
+    public List<Bet> getAllUserBets(String id) {
+	LOG.debug("Entry method  getAllUserBets()");
+	
+	List<Bet> bets = repository.findAllUserBets(Long.valueOf(id));
+	LOG.debug("Exit method  getAllUserBets()");
+	return bets;
+    }
 }

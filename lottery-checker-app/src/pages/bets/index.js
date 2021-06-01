@@ -42,7 +42,7 @@ export default function Bets() {
     }, [actualize])
 
     useEffect(() => {
-        api.get('load-bets').then(bets => {
+        api.get('load-bets/' + userId).then(bets => {
             bets.data.forEach(bet => {
                 const formattedAccumulatedPrize = <NumberFormat
                     value={bet.accumulatedPrize}

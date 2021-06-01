@@ -63,5 +63,14 @@ public class BetController {
 	LOG.debug("Exit method loadAllBets()");
 	return bets;
     }
+    
+    @RequestMapping(value = "load-bets/{id}", method = RequestMethod.GET)
+    public List<Bet> loadUserBets(@PathVariable("id") String id) {
+	LOG.debug("Entry method loadUserBets(@PathVariable(\"id\") String id)  ");
+
+	List<Bet> bets = service.getAllUserBets(id);
+	LOG.debug("Exit method loadUserBets(@PathVariable(\"id\") String id) ");
+	return bets;
+    }
 
 }
