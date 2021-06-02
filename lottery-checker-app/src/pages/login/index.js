@@ -71,11 +71,16 @@ export default function Login() {
             </InputGroup>
 
             <Button style={{ width: "100%", marginTop: 5 }} variant="info" type="submit">Submit</Button>
+            <Form.Row style={{ fontSize: 12, justifyContent: 'center' }}>
+              <a href="#">Register</a>
+              <a style={{ marginLeft: 50 }} href="#">Forgot your password?</a>
+            </Form.Row>
           </Form.Group>
           <Form.Group style={{ display: 'flex', justifyContent: "center" }} as={Col} md="3">
             <Image style={{ width: "50%" }} src={Logo} rounded />
           </Form.Group>
         </Form.Row>
+
       </Form>
 
       <ModalInfo
