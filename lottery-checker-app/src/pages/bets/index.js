@@ -24,6 +24,7 @@ export default function Bets() {
     const [id, setId] = useState(0)
     const [gameId, setGameId] = useState("")
     const [accumulatedPrize, setAccumulatedPrize] = useState("")
+    const [tempAccumulatedPrize, setTempAccumulatedPrize] = useState("")
     const [numbers, setNumbers] = useState("")
     const [lastCheck, setLastCheck] = useState("")
     const [active, setActive] = useState(true)
@@ -96,6 +97,7 @@ export default function Bets() {
         setNumbers(bet.numbers)
         setLastCheck(bet.lastCheck)
         setActive(bet.active)
+        handleAccumulatePrize(bet.accumulatedPrize)
         games.forEach(game => {
             if (game.id === bet.gameId) {
                 setGameName(game.name)
@@ -110,6 +112,7 @@ export default function Bets() {
         setGames([...games])
         setGameName("")
         setAccumulatedPrize("")
+        setTempAccumulatedPrize("")
         setNumbers("")
         setActive(true)
         setTempGame()
@@ -126,6 +129,14 @@ export default function Bets() {
                 setTempGame(game)
             }
         })
+    }
+
+    function handleAccumulatePrize(e) {
+        const value = e.toString()
+        //Replacing to save with point
+        setAccumulatedPrize(value.replace(",", "."))
+        //Replacing to show with coma
+        setTempAccumulatedPrize(value.replace(".", ","))
     }
 
     return (
@@ -157,7 +168,7 @@ export default function Bets() {
                         <InputGroup.Prepend>
                             <InputGroup.Text>$</InputGroup.Text>
                         </InputGroup.Prepend>
-                        <Form.Control required value={accumulatedPrize} onChange={e => setAccumulatedPrize(e.target.value)} placeholder="Total prizes" />
+                        <Form.Control required value={tempAccumulatedPrize} onChange={e => handleAccumulatePrize(e.target.value)} placeholder="Total prizes" />
                     </InputGroup>
                 </Form.Row>
                 <Form.Row style={{ marginTop: 20 }}>
