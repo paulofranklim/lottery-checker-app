@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Menu from '../../components/menu'
-import { Form, Col, Button } from 'react-bootstrap'
+import { Form, Col, Button, InputGroup } from 'react-bootstrap'
 import { api } from '../../services/api'
 import { ModalInfo } from '../../components/modals'
 import { TableList } from '../../components/table'
@@ -151,15 +151,19 @@ export default function Bets() {
                 <Form.Row>
                     {tempGame ? <GameButtons numbers={numbers} setNumbers={setNumbers} tempGame={tempGame} /> : null}
                 </Form.Row>
-
+                <Form.Label>Accumulated Prizes</Form.Label>
                 <Form.Row>
-                    <Form.Group as={Col} md="2" >
-                        <Form.Label>Accumulated Prizes</Form.Label>
-                        <Form.Control required value={accumulatedPrize} onChange={e => setAccumulatedPrize(e.target.value)} placeholder="Total accumulated prize" />
-                    </Form.Group>
+                    <InputGroup as={Col} md="1">
+                        <InputGroup.Prepend>
+                            <InputGroup.Text>$</InputGroup.Text>
+                        </InputGroup.Prepend>
+                        <Form.Control required value={accumulatedPrize} onChange={e => setAccumulatedPrize(e.target.value)} placeholder="Total prizes" />
+                    </InputGroup>
                 </Form.Row>
-                <Button style={{ width: '80px' }} variant="outline-success" type="submit">Save</Button>
-                <Button style={{ width: '80px', marginLeft: 10 }} variant="outline-danger" onClick={() => clearFields()} >Cancel</Button>
+                <Form.Row style={{ marginTop: 20 }}>
+                    <Button style={{ width: '80px' }} variant="outline-success" type="submit">Save</Button>
+                    <Button style={{ width: '80px', marginLeft: 10 }} variant="outline-danger" onClick={() => clearFields()} >Cancel</Button>
+                </Form.Row>
             </Form>
 
             <TableList
