@@ -22,21 +22,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApiResultVO {
-
+    
     @JsonProperty("numero_concurso")
     private Long	     drawNumber;
     @JsonProperty("data_concurso")
     private String	     date;
     @JsonProperty("dezenas")
-    private List<String>     numbers;
+    private List<Integer>    numbers;
     @JsonProperty("nome")
     private String	     name;
     @JsonProperty("premiacao")
     private List<ApiPrizeVO> prizes;
-
+    
     public ApiResultVO() {
     }
-    
+
     /**
      * @param drawNumber
      * @param date
@@ -44,7 +44,7 @@ public class ApiResultVO {
      * @param name
      * @param prizes
      */
-    public ApiResultVO(Long drawNumber, String date, List<String> numbers, String name, List<ApiPrizeVO> prizes) {
+    public ApiResultVO(Long drawNumber, String date, List<Integer> numbers, String name, List<ApiPrizeVO> prizes) {
 	super();
 	this.drawNumber = drawNumber;
 	this.date = date;
@@ -52,14 +52,14 @@ public class ApiResultVO {
 	this.name = name;
 	this.prizes = prizes;
     }
-    
+
     /**
      * @return the drawNumber
      */
     public Long getDrawNumber() {
 	return drawNumber;
     }
-
+    
     /**
      * @param drawNumber
      *            the drawNumber to set
@@ -67,14 +67,14 @@ public class ApiResultVO {
     public void setDrawNumber(Long drawNumber) {
 	this.drawNumber = drawNumber;
     }
-
+    
     /**
      * @return the date
      */
     public String getDate() {
 	return date;
     }
-
+    
     /**
      * @param date
      *            the date to set
@@ -82,29 +82,29 @@ public class ApiResultVO {
     public void setDate(String date) {
 	this.date = date;
     }
-
+    
     /**
      * @return the numbers
      */
-    public List<String> getNumbers() {
+    public List<Integer> getNumbers() {
 	return numbers;
     }
-
+    
     /**
      * @param numbers
      *            the numbers to set
      */
-    public void setNumbers(List<String> numbers) {
+    public void setNumbers(List<Integer> numbers) {
 	this.numbers = numbers;
     }
-
+    
     /**
      * @return the name
      */
     public String getName() {
 	return name;
     }
-
+    
     /**
      * @param name
      *            the name to set
@@ -112,14 +112,14 @@ public class ApiResultVO {
     public void setName(String name) {
 	this.name = name;
     }
-    
+
     /**
      * @return the prizes
      */
     public List<ApiPrizeVO> getPrizes() {
 	return prizes;
     }
-    
+
     /**
      * @param prizes
      *            the prizes to set
@@ -127,5 +127,5 @@ public class ApiResultVO {
     public void setPrizes(List<ApiPrizeVO> prizes) {
 	this.prizes = prizes;
     }
-
+    
 }
