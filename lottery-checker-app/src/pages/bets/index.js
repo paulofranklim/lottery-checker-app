@@ -149,7 +149,7 @@ export default function Bets() {
                         <Form.Control as="select" value={gameName} required onChange={e => handleGameId(e.target.value)} >
                             <option>Select a game</option>
                             {games.map(game => (
-                                <option>{game.name}</option>
+                                <option key={game.name}>{game.name}</option>
                             ))}
                         </Form.Control>
                     </Form.Group>
