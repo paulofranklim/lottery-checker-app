@@ -14,7 +14,6 @@ export default function Bets() {
     const columnValues = ["id", "gameName", "formattedAccumulatedPrize", "numbers", "lastCheck"];
 
     const [bets, setBets] = useState([])
-    const [tempBet, setTempBet] = useState("")
 
     const [tempGame, setTempGame] = useState("")
     const [games, setGames] = useState([])
@@ -80,7 +79,6 @@ export default function Bets() {
 
         try {
             await api.post("save-bet", data)
-            setTempBet(data.id)
             setShowModalInsert(true);
             clearFields();
 
@@ -189,7 +187,7 @@ export default function Bets() {
                 show={showModalInsert}
                 closeModalFunction={() => setShowModalInsert(false)}
                 title="Insert Bet"
-                message={"Bet " + tempBet + " inserted."}
+                message={"Bet inserted."}
             />
 
             <ModalInfo
