@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Menu from '../../components/menu'
 import { Form, Col, Button } from 'react-bootstrap'
 import { api } from '../../services/api'
-import { ModalInfo } from '../../components/modals'
+import { ModalInfo, ModalError } from '../../components/modals'
 import { TableList } from '../../components/table'
 
 export default function Games() {
@@ -23,7 +23,8 @@ export default function Games() {
 
     const [showModalInsert, setShowModalInsert] = useState(false);
     const [showModalError, setShowModalError] = useState(false);
-    const [msgError, setMsgError] = useState("")
+    const [modalErrorMessage, setModalErrorMessage] = useState("")
+    const [errorMessage, setErrorMessage] = useState("")
 
     const [actualize, setActualize] = useState(true)
 
@@ -55,7 +56,8 @@ export default function Games() {
             setActualize(!actualize);
 
         } catch (error) {
-            setMsgError("Cannot insert game. " + error)
+            setModalErrorMessage("Cannot insert game.")
+            setErrorMessage(error.response.data.message)
             setShowModalError(true)
         }
     }
@@ -145,11 +147,12 @@ export default function Games() {
                 message={"Game " + tempGame + " inserted."}
             />
 
-            <ModalInfo
+            <ModalError
                 show={showModalError}
                 closeModalFunction={() => setShowModalError(false)}
                 title="Error!"
-                message={msgError}
+                modalMessage={modalErrorMessage}
+                errorMessage={errorMessage}
             />
         </div>
     );
