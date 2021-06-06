@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Menu from '../../components/menu'
 import { Form, Col, Button } from 'react-bootstrap'
 import { api } from '../../services/api'
-import { ModalInfo } from '../../components/modals'
+import { ModalError, ModalInfo } from '../../components/modals'
 import { TableList } from '../../components/table'
 
 export default function Users() {
@@ -22,7 +22,8 @@ export default function Users() {
 
     const [showModalInsert, setShowModalInsert] = useState(false);
     const [showModalError, setShowModalError] = useState(false);
-    const [msgError, setMsgError] = useState("")
+    const [modalErrorMessage, setModalErrorMessage] = useState("")
+    const [errorMessage, setErrorMessage] = useState("")
 
     const [actualize, setActualize] = useState(true)
 
@@ -48,13 +49,14 @@ export default function Users() {
         try {
 
             await api.post("save-user", data)
-            setTempLogin(data.mail)
+            setTempLogin(data.userName)
             setShowModalInsert(true);
             clearFields();
             setActualize(!actualize);
 
         } catch (error) {
-            setMsgError("Cannot insert user. " + error)
+            setModalErrorMessage("Cannot insert user.")
+            setErrorMessage(error.response.data.message)
             setShowModalError(true)
         }
     }
@@ -126,11 +128,12 @@ export default function Users() {
                 message={"User " + tempLogin + " inserted."}
             />
 
-            <ModalInfo
+            <ModalError
                 show={showModalError}
                 closeModalFunction={() => setShowModalError(false)}
                 title="Error!"
-                message={msgError}
+                modalMessage={modalErrorMessage}
+                errorMessage={errorMessage}
             />
         </div>
     );
