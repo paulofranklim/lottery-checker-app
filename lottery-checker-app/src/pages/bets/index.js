@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Menu from '../../components/menu'
 import { Form, Col, Button, InputGroup } from 'react-bootstrap'
 import { api } from '../../services/api'
-import { ModalInfo } from '../../components/modals'
+import { ModalInfo, ModalError } from '../../components/modals'
 import { TableList } from '../../components/table'
 import { GameButtons } from '../../components/gamebuttons'
 import NumberFormat from 'react-number-format';
@@ -30,7 +30,8 @@ export default function Bets() {
 
     const [showModalInsert, setShowModalInsert] = useState(false);
     const [showModalError, setShowModalError] = useState(false);
-    const [msgError, setMsgError] = useState("")
+    const [modalErrorMessage, setModalErrorMessage] = useState("")
+    const [errorMessage, setErrorMessage] = useState("")
 
     const [actualize, setActualize] = useState(true)
 
@@ -83,7 +84,8 @@ export default function Bets() {
             clearFields();
 
         } catch (error) {
-            setMsgError("Cannot insert bet. " + error)
+            setModalErrorMessage("Cannot insert bet.")
+            setErrorMessage(error.response.data.message)
             setShowModalError(true)
         }
     }
@@ -190,11 +192,12 @@ export default function Bets() {
                 message={"Bet inserted."}
             />
 
-            <ModalInfo
+            <ModalError
                 show={showModalError}
                 closeModalFunction={() => setShowModalError(false)}
                 title="Error!"
-                message={msgError}
+                modalMessage={modalErrorMessage}
+                errorMessage={errorMessage}
             />
         </div>
     );
