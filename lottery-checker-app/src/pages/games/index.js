@@ -57,7 +57,7 @@ export default function Games() {
 
         } catch (error) {
             setModalErrorMessage("Cannot insert game.")
-            setErrorMessage(error.response.data.message)
+            setErrorMessage("Message: " + error.response.data.message)
             setShowModalError(true)
         }
     }

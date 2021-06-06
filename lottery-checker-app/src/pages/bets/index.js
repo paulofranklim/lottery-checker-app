@@ -85,7 +85,7 @@ export default function Bets() {
 
         } catch (error) {
             setModalErrorMessage("Cannot insert bet.")
-            setErrorMessage(error.response.data.message)
+            setErrorMessage("Message: " + error.response.data.message)
             setShowModalError(true)
         }
     }

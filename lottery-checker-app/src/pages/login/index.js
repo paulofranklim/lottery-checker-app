@@ -42,9 +42,8 @@ export default function Login() {
       }
 
     } catch (error) {
-      const { message } = error.response.data;
       setModalMessage("Unauthorized to connect.")
-      setErrorMessage("Message: " + message)
+      setErrorMessage("Message: " + error.response.data.message)
       setShowErrorModal(true)
       clearFields()
     }

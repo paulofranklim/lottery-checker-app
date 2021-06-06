@@ -56,7 +56,7 @@ export default function Users() {
 
         } catch (error) {
             setModalErrorMessage("Cannot insert user.")
-            setErrorMessage(error.response.data.message)
+            setErrorMessage("Message: " + error.response.data.message)
             setShowModalError(true)
         }
     }
