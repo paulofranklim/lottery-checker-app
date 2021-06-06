@@ -45,3 +45,31 @@ export const ModalActionConfirmation = (props) => {
     )
 
 }
+
+export const ModalError = (props) => {
+    const { show, closeModalFunction, title, modalMessage, errorMessage } = props
+
+    return (
+        <div>
+            <Modal show={show} onHide={() => closeModalFunction()} >
+                <Modal.Header closeButton>
+                    <Modal.Title>{title}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>
+                        {modalMessage}
+                    </p>
+                    <p>
+                        {errorMessage}
+                    </p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => closeModalFunction()}>
+                        Ok
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </div>
+    )
+
+}

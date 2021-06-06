@@ -4,13 +4,16 @@ import { Container, Form, Col, Button, Image, InputGroup } from 'react-bootstrap
 import Logo from '../../assets/logo.png'
 import { FaLock, FaUser } from 'react-icons/fa'
 import { api } from '../../services/api'
-import { ModalInfo } from '../../components/modals'
+import { ModalError } from '../../components/modals'
 
 export default function Login() {
 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+
+  const [modalMessage, setModalMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
 
   const history = useHistory()
 
@@ -35,12 +38,15 @@ export default function Login() {
         sessionStorage.setItem('userId', id)
         history.push("/home")
       } else {
-        setShowModal(true)
+        setShowErrorModal(true)
       }
 
     } catch (error) {
+      const { message } = error.response.data;
+      setModalMessage("Unauthorized to connect.")
+      setErrorMessage("Message: " + message)
+      setShowErrorModal(true)
       clearFields()
-      setShowModal(true)
     }
   }
 
@@ -83,11 +89,12 @@ export default function Login() {
 
       </Form>
 
-      <ModalInfo
-        show={showModal}
-        closeModalFunction={() => setShowModal(false)}
+      <ModalError
+        show={showErrorModal}
+        closeModalFunction={() => setShowErrorModal(false)}
         title="Login info"
-        message="Unauthorized to connect."
+        modalMessage={modalMessage}
+        errorMessage={errorMessage}
       />
 
     </Container>
