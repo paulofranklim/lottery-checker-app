@@ -4,12 +4,13 @@ import { Container, Form, Col, Button, Image, InputGroup } from 'react-bootstrap
 import Logo from '../../assets/logo.png'
 import { FaLock, FaUser } from 'react-icons/fa'
 import { api } from '../../services/api'
-import { ModalError } from '../../components/modals'
+import { ModalError, ModalNewUser } from '../../components/modals'
 
 export default function Login() {
 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [showNewUserModal, setShowNewUserModal] = useState(false)
   const [showErrorModal, setShowErrorModal] = useState(false);
 
   const [modalMessage, setModalMessage] = useState("")
@@ -77,7 +78,7 @@ export default function Login() {
 
             <Button style={{ width: "100%", marginTop: 5 }} variant="info" type="submit">Submit</Button>
             <Form.Row style={{ fontSize: 12, justifyContent: 'center' }}>
-              <a href="#">Register</a>
+              <a href="#" onClick={() => setShowNewUserModal(true)}>Register</a>
               <a style={{ marginLeft: 50 }} href="#">Forgot your password?</a>
             </Form.Row>
           </Form.Group>
@@ -96,6 +97,13 @@ export default function Login() {
         errorMessage={errorMessage}
       />
 
-    </Container>
+      <ModalNewUser
+        show={showNewUserModal}
+        title="Create new user"
+        saveUserFunction={() => setShowNewUserModal(false)}
+        closeModalFunction={() => setShowNewUserModal(false)}
+      />
+
+    </Container >
   );
 }

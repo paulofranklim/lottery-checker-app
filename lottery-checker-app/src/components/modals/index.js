@@ -73,3 +73,25 @@ export const ModalError = (props) => {
     )
 
 }
+
+export const ModalNewUser = (props) => {
+    const { show, title, saveUserFunction, closeModalFunction } = props
+    return (
+        <Modal show={show} onHide={() => closeModalFunction()} aria-labelledby="contained-modal-title-vcenter" centered>
+            <Modal.Header>
+                <Modal.Title>{title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="primary" onClick={() => saveUserFunction()}>
+                    Save
+                </Button>
+                <Button variant="danger" onClick={() => closeModalFunction()}>
+                    Close
+                </Button>
+            </Modal.Footer>
+        </Modal>
+    )
+}
