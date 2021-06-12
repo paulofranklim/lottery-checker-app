@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Button } from 'react-bootstrap'
+import { Modal, Button, Form, Col } from 'react-bootstrap'
 
 export const ModalInfo = (props) => {
     const { show, closeModalFunction, title, message } = props
@@ -82,7 +82,30 @@ export const ModalNewUser = (props) => {
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-
+                <Form style={{ margin: 20 }} onSubmit={saveUserFunction}>
+                    <Form.Row>
+                        <Form.Group as={Col} >
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control required placeholder="Insert name" />
+                        </Form.Group>
+                    </Form.Row>
+                    <Form.Row>
+                        <Form.Group as={Col} md="6" >
+                            <Form.Label>Login</Form.Label>
+                            <Form.Control required placeholder="Insert user name" />
+                        </Form.Group>
+                        <Form.Group as={Col} md="6">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" placeholder="Insert password" />
+                        </Form.Group>
+                    </Form.Row>
+                    <Form.Row>
+                        <Form.Group as={Col} >
+                            <Form.Label>Mail</Form.Label>
+                            <Form.Control required placeholder="Insert mail" />
+                        </Form.Group>
+                    </Form.Row>
+                </Form>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="primary" onClick={() => saveUserFunction()}>
