@@ -8,10 +8,9 @@ import { GameButtons } from '../../components/gamebuttons'
 import NumberFormat from 'react-number-format';
 
 export default function Bets() {
-    const userId = sessionStorage.getItem('userId')
 
-    const columnsNames = ["Id", "Game", "Prizes", "Numbers", "Last Check", "Active", "Edit"];
-    const columnValues = ["id", "gameName", "formattedAccumulatedPrize", "numbers", "lastCheck"];
+    const columnsNames = ["Id", "User Name", "Game", "Prizes", "Numbers", "Last Check", "Active", "Edit"];
+    const columnValues = ["id", "userName", "gameName", "formattedAccumulatedPrize", "numbers", "lastCheck"];
 
     const [bets, setBets] = useState([])
 
@@ -20,8 +19,11 @@ export default function Bets() {
     const [gameName, setGameName] = useState("")
 
 
+    const [users, setUsers] = useState([])
+
     const [id, setId] = useState(0)
     const [gameId, setGameId] = useState("")
+    const [userId, setUserId] = useState("")
     const [accumulatedPrize, setAccumulatedPrize] = useState("")
     const [tempAccumulatedPrize, setTempAccumulatedPrize] = useState("")
     const [numbers, setNumbers] = useState("")
@@ -43,6 +45,12 @@ export default function Bets() {
     }, [actualize])
 
     useEffect(() => {
+        api.get('load-users').then(users => {
+            setUsers(users.data)
+        })
+    }, [games])
+
+    useEffect(() => {
         api.get('load-bets').then(bets => {
             bets.data.forEach(bet => {
                 const formattedAccumulatedPrize = <NumberFormat
@@ -60,10 +68,16 @@ export default function Bets() {
                         bet.gameName = game.name
                     }
                 })
+
+                users.forEach(user => {
+                    if (user.id === bet.userId) {
+                        bet.userName = user.userName
+                    }
+                })
             })
             setBets(bets.data)
         })
-    }, [games])
+    }, [users])
 
     async function handleInsert(e) {
         e.preventDefault()
@@ -93,6 +107,7 @@ export default function Bets() {
     function handleEditClick(bet) {
         setId(bet.id)
         setGameId(bet.gameId)
+        setUserId(bet.userId)
         setAccumulatedPrize(bet.accumulatedPrize)
         setNumbers(bet.numbers)
         setLastCheck(bet.lastCheck)
@@ -109,6 +124,7 @@ export default function Bets() {
     function clearFields() {
         setId("")
         setGameId("")
+        setUserId("")
         setGames([...games])
         setGameName("")
         setAccumulatedPrize("")
