@@ -13,7 +13,7 @@ export const GameButtons = (props) => {
 
   const buttons = [];
   for (let i = 1; i <= size; i++) {
-    let btn = <Button key={i} size="sm" value={i} style={{ textAlign: "center", width: "35px", margin: 2, backgroundColor: vNumbers.includes(i + "") ? "gray" : "#0d6efd" }} onClick={e => handleNumbers(e)}>{i}</Button>
+    let btn = <Button key={i} size="sm" value={i} style={{ textAlign: "center", width: "35px", margin: 2, backgroundColor: vNumbers.includes(i + "") ? "#0d6efd" : "gray" }} onClick={e => handleNumbers(e)}>{i}</Button>
     buttons.push(btn)
   }
 
@@ -45,9 +45,9 @@ export const GameButtons = (props) => {
             ))
           }
           <Row style={{ marginLeft: "5px", marginTop: "15px" }}>
-            <span style={{ marginLeft: "5px", backgroundColor: "#0d6efd", width: "10px", height: "10px" }} />
-            <span style={{ marginLeft: "5px", fontSize: 12 }}>Available</span>
             <span style={{ marginLeft: "5px", backgroundColor: "gray", width: "10px", height: "10px" }} />
+            <span style={{ marginLeft: "5px", fontSize: 12 }}>Available</span>
+            <span style={{ marginLeft: "5px", backgroundColor: "#0d6efd", width: "10px", height: "10px" }} />
             <span style={{ marginLeft: "5px", fontSize: 12 }}>Selected</span>
           </Row>
           <Row style={{ marginLeft: "5px" }}>
