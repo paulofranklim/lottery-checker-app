@@ -38,7 +38,7 @@ export default function Menu() {
         </Navbar.Collapse>
       </Navbar>
 
-      <Modal show={showModalLogOut} onHide={() => setShowModalLogOut(false)}>
+      <Modal show={showModalLogOut} onHide={() => setShowModalLogOut(false)} centered>
         <Modal.Header closeButton>
           <Modal.Title>Confirm exit</Modal.Title>
         </Modal.Header>
