@@ -8,7 +8,7 @@ export const ModalInfo = (props) => {
 
     return (
         <div>
-            <Modal show={show} onHide={() => closeModalFunction()} >
+            <Modal show={show} onHide={() => closeModalFunction()} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
@@ -29,7 +29,7 @@ export const ModalActionConfirmation = (props) => {
 
     return (
         <div>
-            <Modal show={show} onHide={() => closeModalFunction()} >
+            <Modal show={show} onHide={() => closeModalFunction()} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
@@ -53,7 +53,7 @@ export const ModalError = (props) => {
 
     return (
         <div>
-            <Modal show={show} onHide={() => closeModalFunction()} >
+            <Modal show={show} onHide={() => closeModalFunction()} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
