@@ -77,7 +77,7 @@ export const ModalError = (props) => {
 export const ModalNewUser = (props) => {
     const { show, title, saveUserFunction, closeModalFunction } = props
     return (
-        <Modal show={show} onHide={() => closeModalFunction()} aria-labelledby="contained-modal-title-vcenter" centered>
+        <Modal show={show} onHide={() => closeModalFunction()} centered>
             <Modal.Header>
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
@@ -114,6 +114,31 @@ export const ModalNewUser = (props) => {
                 <Button variant="danger" onClick={() => closeModalFunction()}>
                     Close
                 </Button>
+            </Modal.Footer>
+        </Modal>
+    )
+}
+
+export const ModalResetPassword = (props) => {
+    const { show, title, sendFunction, closeModalFunction } = props
+    return (
+        <Modal show={show} onHide={() => closeModalFunction()} centered>
+            <Modal.Header >
+                <Modal.Title>{title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Form onSubmit={sendFunction}>
+                    <Form.Row>
+                        <Form.Group as={Col}>
+                            <Form.Label>User e-mail</Form.Label>
+                            <Form.Control required placeholder="Insert your mail to send a reset link" />
+                        </Form.Group>
+                    </Form.Row>
+                </Form>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="primary" onClick={() => sendFunction()}>Send</Button>
+                <Button variant="danger" onClick={() => closeModalFunction()}>Close</Button>
             </Modal.Footer>
         </Modal>
     )
