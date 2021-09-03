@@ -101,7 +101,6 @@ export default function Login() {
       <ModalNewUser
         show={showNewUserModal}
         title="Create new user"
-        saveUserFunction={() => setShowNewUserModal(false)}
         closeModalFunction={() => setShowNewUserModal(false)}
       />
 
