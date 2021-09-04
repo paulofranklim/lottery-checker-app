@@ -140,12 +140,15 @@ export const ModalNewUser = (props) => {
                                 <Form.Control value={mail} onChange={e => setMail(e.target.value)} required placeholder="Insert mail" />
                             </Form.Group>
                         </Form.Row>
-                        <Button variant="primary" type="submit">
-                            Create
-                        </Button>
-                        <Button variant="danger" onClick={() => closeModalFunction()}>
-                            Close
-                        </Button>
+                        <Form.Row className="justify-content-between">
+                            <Button variant="primary" type="submit">
+                                Create
+                            </Button>
+                            <Button variant="danger" onClick={() => closeModalFunction()}>
+                                Close
+                            </Button>
+                        </Form.Row>
+
                     </Form>
                 </Modal.Body>
 
@@ -175,12 +178,12 @@ export const ModalResetPassword = (props) => {
                             <Form.Control required placeholder="Insert your mail to send a reset link" />
                         </Form.Group>
                     </Form.Row>
+                    <Form.Row className="justify-content-between">
+                        <Button variant="primary" onClick={() => sendFunction()}>Send</Button>
+                        <Button variant="danger" onClick={() => closeModalFunction()}>Close</Button>
+                    </Form.Row>
                 </Form>
             </Modal.Body>
-            <Modal.Footer>
-                <Button variant="primary" onClick={() => sendFunction()}>Send</Button>
-                <Button variant="danger" onClick={() => closeModalFunction()}>Close</Button>
-            </Modal.Footer>
         </Modal>
     )
 }

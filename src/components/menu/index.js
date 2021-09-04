@@ -43,7 +43,7 @@ export default function Menu() {
           <Modal.Title>Confirm exit</Modal.Title>
         </Modal.Header>
         <Modal.Body>Do you want to exit?</Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="justify-content-between">
           <Button variant="danger" onClick={handleLogOut}>
             Confirm
           </Button>

@@ -78,9 +78,9 @@ export default function Login() {
             </InputGroup>
 
             <Button style={{ width: "100%", marginTop: 5 }} variant="info" type="submit">Submit</Button>
-            <Form.Row style={{ fontSize: 12, justifyContent: 'center' }}>
+            <Form.Row className="justify-content-between">
               <a href="#" onClick={() => setShowNewUserModal(true)}>Register</a>
-              <a href="#" onClick={() => setShowResetPasswordModal(true)} style={{ marginLeft: 50 }} >Forgot your password?</a>
+              <a href="#" onClick={() => setShowResetPasswordModal(true)}>Forgot your password?</a>
             </Form.Row>
           </Form.Group>
           <Form.Group style={{ display: 'flex', justifyContent: "center" }} as={Col} md="3">
