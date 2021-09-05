@@ -80,7 +80,7 @@ export default function Users() {
     }
 
     return (
-        <div>
+        <>
             <Menu />
             <Form style={{ margin: 20 }} onSubmit={handleInsert}>
                 <Form.Row>
@@ -109,8 +109,14 @@ export default function Users() {
                         <Form.Control required value={mail} onChange={e => setMail(e.target.value)} placeholder="Insert mail" />
                     </Form.Group>
                 </Form.Row>
-                <Button style={{ width: '80px' }} variant="outline-success" type="submit">Save</Button>
-                <Button style={{ width: '80px', marginLeft: 10 }} variant="outline-danger" onClick={() => clearFields()} >Cancel</Button>
+                <Form.Row className="justify-content-between" style={{ width: '180px' }}>
+                    <Col>
+                        <Button style={{ width: '80px' }} variant="outline-success" type="submit">Save</Button>
+                    </Col>
+                    <Col>
+                        <Button style={{ width: '80px' }} variant="outline-danger" onClick={() => clearFields()} >Cancel</Button>
+                    </Col>
+                </Form.Row>
             </Form>
 
             <TableList
@@ -118,7 +124,7 @@ export default function Users() {
                 columnsNames={columnsNames}
                 columnValues={columnValues}
                 updateFunction={handleEditClick}
-                pageSize={7}
+                pageSize={5}
             />
 
             <ModalInfo
@@ -135,6 +141,6 @@ export default function Users() {
                 modalMessage={modalErrorMessage}
                 errorMessage={errorMessage}
             />
-        </div>
+        </>
     );
 }

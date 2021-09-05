@@ -85,7 +85,7 @@ export default function Games() {
     return (
         <>
             <Menu />
-            <Form as={Col} onSubmit={handleInsert}>
+            <Form style={{ margin: 20 }} onSubmit={handleInsert}>
                 <Form.Row style={{ width: '480px' }}>
                     <Col>
                         <Form.Label>Game</Form.Label>
@@ -124,10 +124,13 @@ export default function Games() {
                         </Form.Group>
                     </Col>
                 </Form.Row>
-
                 <Form.Row className="justify-content-between" style={{ width: '180px' }}>
-                    <Button style={{ width: '80px' }} variant="outline-success" type="submit">Save</Button>
-                    <Button style={{ width: '80px' }} variant="outline-danger" onClick={() => clearFields()} >Cancel</Button>
+                    <Col>
+                        <Button style={{ width: '80px' }} variant="outline-success" type="submit">Save</Button>
+                    </Col>
+                    <Col>
+                        <Button style={{ width: '80px' }} variant="outline-danger" onClick={() => clearFields()} >Cancel</Button>
+                    </Col>
                 </Form.Row>
             </Form>
 
@@ -136,7 +139,7 @@ export default function Games() {
                 columnsNames={columnsNames}
                 columnValues={columnValues}
                 updateFunction={handleEditClick}
-                pageSize={10}
+                pageSize={5}
             />
 
             <ModalInfo
