@@ -140,11 +140,11 @@ export default function Bets() {
     }
 
     return (
-        <div>
+        <>
             <Menu />
             <Form style={{ margin: 20 }} onSubmit={handleInsert}>
-                <Form.Row>
-                    <Form.Group as={Col} md="2" >
+                <Form.Row style={{ width: "480px" }}>
+                    <Col md="6" >
                         <Form.Label>Game</Form.Label>
                         <Form.Control as="select" value={gameName} required onChange={e => handleGameId(e.target.value)} >
                             <option>Select a game</option>
@@ -152,28 +152,32 @@ export default function Bets() {
                                 <option key={game.name}>{game.name}</option>
                             ))}
                         </Form.Control>
-                    </Form.Group>
-                    <Form.Group>
+                    </Col>
+                    <Col>
                         <Form.Label />
                         <Form.Check value={active} checked={active} onChange={e => setActive(e.target.checked)} style={{ margin: 15 }} type="switch" id="custom-switch" label="Active" />
-                    </Form.Group>
+                    </Col>
                 </Form.Row>
 
-                <Form.Row>
+                <Form.Row style={{ width: "480px" }}>
                     {tempGame ? <GameButtons numbers={numbers} setNumbers={setNumbers} tempGame={tempGame} /> : null}
                 </Form.Row>
                 <Form.Label>Accumulated Prizes</Form.Label>
-                <Form.Row>
-                    <InputGroup as={Col} md="1">
+                <Form.Row style={{ width: "480px" }}>
+                    <InputGroup as={Col} md="4">
                         <InputGroup.Prepend>
                             <InputGroup.Text>$</InputGroup.Text>
                         </InputGroup.Prepend>
                         <Form.Control required value={tempAccumulatedPrize} onChange={e => handleAccumulatePrize(e.target.value)} placeholder="Total prizes" />
                     </InputGroup>
                 </Form.Row>
-                <Form.Row style={{ marginTop: 20 }}>
-                    <Button style={{ width: '80px' }} variant="outline-success" type="submit">Save</Button>
-                    <Button style={{ width: '80px', marginLeft: 10 }} variant="outline-danger" onClick={() => clearFields()} >Cancel</Button>
+                <Form.Row className="justify-content-between" style={{ width: '180px', marginTop: "15px" }}>
+                    <Col>
+                        <Button style={{ width: '80px' }} variant="outline-success" type="submit">Save</Button>
+                    </Col>
+                    <Col>
+                        <Button style={{ width: '80px' }} variant="outline-danger" onClick={() => clearFields()} >Cancel</Button>
+                    </Col>
                 </Form.Row>
             </Form>
 
@@ -182,7 +186,7 @@ export default function Bets() {
                 columnsNames={columnsNames}
                 columnValues={columnValues}
                 updateFunction={handleEditClick}
-                pageSize={7}
+                pageSize={5}
             />
 
             <ModalInfo
@@ -199,6 +203,6 @@ export default function Bets() {
                 modalMessage={modalErrorMessage}
                 errorMessage={errorMessage}
             />
-        </div>
+        </>
     );
 }

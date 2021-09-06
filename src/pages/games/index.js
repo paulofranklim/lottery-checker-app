@@ -6,8 +6,8 @@ import { ModalInfo, ModalError } from '../../components/modals'
 import { TableList } from '../../components/table'
 
 export default function Games() {
-    const columnsNames = ["Id", "Game", "Min", "Max", "Last Number", "Last Draw", "Active", "Edit"];
-    const columnValues = ["id", "name", "numberMin", "numberMax", "lastPossibleNumber", "lastDraw"];
+    const columnsNames = ["Id", "Game", "Min", "Max", "Last Number", "Last Drawn", "Active", "Edit"];
+    const columnValues = ["id", "name", "numberMin", "numberMax", "lastPossibleNumber", "lastDrawn"];
 
     const [games, setGames] = useState([])
 
@@ -16,7 +16,7 @@ export default function Games() {
     const [numberMin, setNumberMin] = useState("")
     const [numberMax, setNumberMax] = useState("")
     const [lastPossibleNumber, setLastPossibleNumber] = useState("")
-    const [lastDraw, setLastDraw] = useState("")
+    const [lastDrawn, setLastDrawn] = useState("")
     const [active, setActive] = useState(true)
 
     const [tempGame, setTempGame] = useState("")
@@ -44,13 +44,13 @@ export default function Games() {
             numberMin,
             numberMax,
             lastPossibleNumber,
-            lastDraw,
+            lastDrawn,
             active
         }
 
         try {
             await api.post("save-game", data)
-            setTempGame(data.id)
+            setTempGame(data.name)
             setShowModalInsert(true);
             clearFields();
             setActualize(!actualize);
@@ -68,7 +68,7 @@ export default function Games() {
         setNumberMin(game.numberMin)
         setNumberMax(game.numberMax)
         setLastPossibleNumber(game.lastPossibleNumber)
-        setLastDraw(game.lastDraw)
+        setLastDrawn(game.lastDrawn)
         setActive(game.setActive)
     }
 
@@ -78,16 +78,16 @@ export default function Games() {
         setNumberMin("")
         setNumberMax("")
         setLastPossibleNumber("")
-        setLastDraw("")
+        setLastDrawn("")
         setActive(true)
     }
 
     return (
-        <div>
+        <>
             <Menu />
             <Form style={{ margin: 20 }} onSubmit={handleInsert}>
-                <Form.Row as={Col} md="3">
-                    <Col xs={5}>
+                <Form.Row style={{ width: '480px' }}>
+                    <Col>
                         <Form.Label>Game</Form.Label>
                         <Form.Control required value={name} onChange={e => setName(e.target.value)} placeholder="Insert game name" />
                     </Col>
@@ -96,40 +96,42 @@ export default function Games() {
                         <Form.Check value={active} checked={active} onChange={e => setActive(e.target.checked)} style={{ margin: 15 }} type="switch" id="custom-switch" label="Active" />
                     </Col>
                 </Form.Row>
-                <Form.Row as={Col} md="1">
-                    <Col>
+                <Form.Row style={{ width: "480px" }}>
+                    <Col sm={3}>
                         <Form.Group >
-                            <Form.Label>Last Draw</Form.Label>
-                            <Form.Control required value={lastDraw} onChange={e => setLastDraw(e.target.value)} placeholder="Last draw" />
+                            <Form.Label>Last Drawn</Form.Label>
+                            <Form.Control required value={lastDrawn} onChange={e => setLastDrawn(e.target.value)} placeholder="Last drawn" />
                         </Form.Group>
                     </Col>
                 </Form.Row>
-                <Form.Row as={Col} md="3">
-                    <Col xs={2}>
-                        <Form.Group >
+                <Form.Row style={{ width: "480px" }}>
+                    <Col sm={2}>
+                        <Form.Group>
                             <Form.Label>Min</Form.Label>
                             <Form.Control required value={numberMin} onChange={e => setNumberMin(e.target.value)} placeholder="Min" />
                         </Form.Group>
                     </Col>
-                    <Col xs={2}>
+                    <Col sm={2}>
                         <Form.Group >
                             <Form.Label>Max</Form.Label>
                             <Form.Control required value={numberMax} onChange={e => setNumberMax(e.target.value)} placeholder="Max" />
                         </Form.Group>
                     </Col>
-                    <Col xs={3}>
+                    <Col sm={2}>
                         <Form.Group >
-                            <Form.Label>Last Possible</Form.Label>
+                            <Form.Label>Last</Form.Label>
                             <Form.Control required value={lastPossibleNumber} onChange={e => setLastPossibleNumber(e.target.value)} placeholder="Last Possible" />
                         </Form.Group>
                     </Col>
                 </Form.Row>
-
-                <Form.Row as={Col} md="2">
-                    <Button style={{ width: '80px', marginLeft: 5 }} variant="outline-success" type="submit">Save</Button>
-                    <Button style={{ width: '80px', marginLeft: 5 }} variant="outline-danger" onClick={() => clearFields()} >Cancel</Button>
+                <Form.Row className="justify-content-between" style={{ width: '180px' }}>
+                    <Col>
+                        <Button style={{ width: '80px' }} variant="outline-success" type="submit">Save</Button>
+                    </Col>
+                    <Col>
+                        <Button style={{ width: '80px' }} variant="outline-danger" onClick={() => clearFields()} >Cancel</Button>
+                    </Col>
                 </Form.Row>
-
             </Form>
 
             <TableList
@@ -154,6 +156,6 @@ export default function Games() {
                 modalMessage={modalErrorMessage}
                 errorMessage={errorMessage}
             />
-        </div>
+        </>
     );
 }
