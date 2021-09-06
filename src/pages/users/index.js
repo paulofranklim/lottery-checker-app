@@ -83,8 +83,8 @@ export default function Users() {
         <>
             <Menu />
             <Form style={{ margin: 20 }} onSubmit={handleInsert}>
-                <Form.Row>
-                    <Col md="2" >
+                <Form.Row style={{ width: "480px" }}>
+                    <Col md="5" >
                         <Form.Label>Name</Form.Label>
                         <Form.Control required value={name} onChange={e => setName(e.target.value)} placeholder="Insert name" />
                     </Col>
@@ -93,23 +93,23 @@ export default function Users() {
                         <Form.Check value={active} checked={active} onChange={e => setActive(e.target.checked)} style={{ margin: 15 }} type="switch" id="custom-switch" label="Active" />
                     </Col>
                 </Form.Row>
-                <Form.Row>
-                    <Col md="2" >
+                <Form.Row style={{ width: "480px" }}>
+                    <Col md="5" >
                         <Form.Label>Login</Form.Label>
                         <Form.Control required value={userName} onChange={e => setUserName(e.target.value)} placeholder="Insert user name" />
                     </Col>
-                    <Col md="2">
+                    <Col md="5">
                         <Form.Label>Password</Form.Label>
                         <Form.Control required value={password} onChange={e => setPassword(e.target.value)} type="password" placeholder="Insert password" />
                     </Col>
                 </Form.Row>
-                <Form.Row>
-                    <Col md="2" >
+                <Form.Row style={{ width: "480px" }}>
+                    <Col md="10" >
                         <Form.Label>Mail</Form.Label>
                         <Form.Control required value={mail} onChange={e => setMail(e.target.value)} placeholder="Insert mail" />
                     </Col>
                 </Form.Row>
-                <Form.Row className="justify-content-between" style={{ width: '180px', marginTop: "15px" }}>
+                <Form.Row style={{ width: "480px" }} className="justify-content-between" style={{ width: '180px', marginTop: "15px" }}>
                     <Col>
                         <Button style={{ width: '80px' }} variant="outline-success" type="submit">Save</Button>
                     </Col>
