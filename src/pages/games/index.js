@@ -50,7 +50,7 @@ export default function Games() {
 
         try {
             await api.post("save-game", data)
-            setTempGame(data.id)
+            setTempGame(data.name)
             setShowModalInsert(true);
             clearFields();
             setActualize(!actualize);

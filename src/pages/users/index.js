@@ -84,32 +84,32 @@ export default function Users() {
             <Menu />
             <Form style={{ margin: 20 }} onSubmit={handleInsert}>
                 <Form.Row>
-                    <Form.Group as={Col} md="2" >
+                    <Col md="2" >
                         <Form.Label>Name</Form.Label>
                         <Form.Control required value={name} onChange={e => setName(e.target.value)} placeholder="Insert name" />
-                    </Form.Group>
-                    <Form.Group>
+                    </Col>
+                    <Col>
                         <Form.Label />
                         <Form.Check value={active} checked={active} onChange={e => setActive(e.target.checked)} style={{ margin: 15 }} type="switch" id="custom-switch" label="Active" />
-                    </Form.Group>
+                    </Col>
                 </Form.Row>
                 <Form.Row>
-                    <Form.Group as={Col} md="2" >
+                    <Col md="2" >
                         <Form.Label>Login</Form.Label>
                         <Form.Control required value={userName} onChange={e => setUserName(e.target.value)} placeholder="Insert user name" />
-                    </Form.Group>
-                    <Form.Group as={Col} md="2">
+                    </Col>
+                    <Col md="2">
                         <Form.Label>Password</Form.Label>
                         <Form.Control required value={password} onChange={e => setPassword(e.target.value)} type="password" placeholder="Insert password" />
-                    </Form.Group>
+                    </Col>
                 </Form.Row>
                 <Form.Row>
-                    <Form.Group as={Col} md="2" >
+                    <Col md="2" >
                         <Form.Label>Mail</Form.Label>
                         <Form.Control required value={mail} onChange={e => setMail(e.target.value)} placeholder="Insert mail" />
-                    </Form.Group>
+                    </Col>
                 </Form.Row>
-                <Form.Row className="justify-content-between" style={{ width: '180px' }}>
+                <Form.Row className="justify-content-between" style={{ width: '180px', marginTop: "15px" }}>
                     <Col>
                         <Button style={{ width: '80px' }} variant="outline-success" type="submit">Save</Button>
                     </Col>
